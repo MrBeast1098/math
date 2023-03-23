@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TL AI</title>
+</head>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<!--<script>-->
+<!--    if(sessionStorage.getItem('access') === 'true'){-->
+<!--        console.log('Success');-->
+<!--    }else{-->
+<!--        let redirect = 'http://zbwebdesign.com/signup.html';-->
+<!--        alert('Access denied');-->
+<!--        window.location.href = redirect;-->
+<!--    }-->
+<!--</script>-->
+
+<script>
+    function sendTo(type){
+        let password = 'tLanch'
+        let entPass = prompt('ENTRANCE CODE');
+        if(entPass === password){
+            sessionStorage.setItem('access', 'true');
+            if(type === 'ai') {
+                window.location.href = 'http://167.99.232.131/tLanchAI.html'
+            }
+        }else {
+            alert('Invalid password')
+        }
+    }
+</script>
+
+
+<body>
+<header id="head"></header>
+<div id="container">
+    <div class="button" onclick="sendTo('ai')">Chat GPT</div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+    <div class="button"></div>
+</div>
+</body>
+<style>
+    body {
+        background-color: white;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    #container{
+        position: fixed;
+        top: 30vh;
+        height: 40vh;
+        left: 25vw;
+        width: 50vw;
+        background-color: #282828;
+        border: 3px solid #10a37f;
+        border-radius: 5px;
+        padding: 15px;
+    }
+
+    .button{
+        position: relative;
+        width: 20%;
+        margin: 5%;
+        height: 20%;
+        background-color: #10a37f;
+        border: 3px solid white;
+        color: white;
+        border-radius: 5px;
+        float: left;
+        text-align: center;
+        font-family: monospace;
+        font-size: 20px;
+    }
+    .button:hover{
+        background-color: lime;
+        color: black;
+    }
+
+
+</style>
+</html>

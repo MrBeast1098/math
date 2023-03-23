@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TL AI</title>
+</head>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+    if(sessionStorage.getItem('access') === 'true'){
+        console.log('Success');
+    }
+
+    function emitPrompt() {
+        webSocket.emit('js', JSON.stringify({type: 'ai', data: document.getElementById('input').value, mode:'ai'}))
+        document.getElementById('result').innerHTML += `<br><br><a><img src="https://i.ibb.co/Tmn4dr8/5770f01a32c3c53e90ecda61483ccb08.jpg" border="0" width="35" height="35" ></a><br> ${document.getElementById('input').value}`;
+    }
+</script>
+
+  <div id="set">settings<div id="game">Minecraft ></div></div>
+
+
+<body>
+<a href="index.html"></a>
+
+
+<div id="result"></div>
+<div id="inputCenter"><input type="text" class="input" id="input">
+    <button onclick="emitPrompt()" id="sendbtn">></button></div>
+
+
+<script>
+    let webSocket = io.connect(location.host)
+    let msg
+    webSocket.on('html', function(data) {
+        try {
+            msg = JSON.parse(data);
+            console.log(msg);
+
+            switch (msg.type) {
+                case 'aiRec':
+                    document.getElementById('result').innerHTML += `<br><br><a href="https://ibb.co/fQP0TYM"><img src="https://i.ibb.co/Km3y8j6/Chat-GPT-logo-svg.png" width="35" height="35"  alt="Chat-GPT-logo-svg" border="0"></a><br> ${msg.data.replace('<br>', '')}`;
+                    break;
+                default:
+                    break;
+            }
+        } catch (ex) {
+
+        }
+    })
+
+</script>
+</body>
+<style>
+    
+    #game{
+      bottom: 50px;
+      color: white;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+      position: absolute;
+      left: 45px;
+    }
+  
+    #set{
+      left: 0px;
+      background-color: #181b1c;
+      height: 100%;
+      width: 13vw;
+      bottom: 0px;
+      position: fixed;
+      color: white;
+      font-family: Helvetica, sans-serif;
+      text-align: center;
+    }
+
+    body{
+        background-color: #565b63;
+        background-size: cover;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        font-family: monospace;
+    }
+
+    #sendbtn
+    {
+      font-weight: 900;
+      background-color: #6b727d;
+      border: none;
+      color: #c7d0d4;
+      font-size: 25px;
+    }
+    #sendbtn:active
+    {
+      font-weight: bolder;
+      background-color: #6b727d;
+      border: none;
+      color: #dfe4e6;
+      font-size: 25px;
+    }
+
+
+    #home{
+        background-color: #355750;
+
+    }
+        #inputCenter{
+        background-color: #6b727d;
+        position: relative;
+        margin: auto;
+        width: 50vw;
+        padding: 10px;
+        border-radius: 7px;
+        top: 30px;
+
+    }
+    .input{
+        position: relative;
+        width: 44vw;
+        background-color: #6b727d;
+        border-radius: 2px;
+        height: 25px;
+        left: 25px;
+        margin-right: 40px;
+        border:none;
+        position: static;
+	font-size: 18px;
+        color: white;
+        font-weight: 600;
+        font-family: Helvetica, sans-serif;
+    }
+
+    #result {
+        position: relative;
+        margin: auto;
+        width: 50vw;
+        height: 80%;
+        top: 25px;
+        text-align: left;
+        padding: 10px;
+        font-size: 18px;
+        color: white;
+	font-weight: 600;
+	font-family: Helvetica, sans-serif;
+        background-color: #565b63;
+            overflow-x: hidden;
+            overflow-y: auto, hidden;
+    }  
+
+    #button{
+        width: 10vw;
+        background-color: black;
+        color: white;
+        border: 2px solid #355750;
+        border-radius: 5px;
+        font-size: 15px;
+        height: 30px;
+        font-family: monospace;
+    }
+
+    #button:hover{
+        border: 3px solid white;
+    }
+
+    ::placeholder {
+        color: black;
+    }
+
+
+
+
+
+</style>
+</html>
